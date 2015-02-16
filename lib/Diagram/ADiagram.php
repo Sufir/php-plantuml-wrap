@@ -11,7 +11,7 @@ namespace sufir\PlantUml\Diagram;
 
 use SplObjectStorage;
 use sufir\PlantUml\Diagram\Base\AElement;
-use sufir\PlantUml\Diagram\Base\ARelation;
+use sufir\PlantUml\Diagram\Base\Relation;
 
 /**
  * ADiagram
@@ -202,10 +202,10 @@ abstract class ADiagram
     }
 
     /**
-     * @param \sufir\PlantUml\Diagram\Base\AElement $relation
+     * @param \sufir\PlantUml\Diagram\Base\Relation $relation
      * @return \sufir\PlantUml\Diagram\ADiagram
      */
-    public function addRelation(ARelation $relation)
+    public function addRelation(Relation $relation)
     {
         if (!$this->relations->contains($relation)) {
             $this->relations->attach($relation);
@@ -213,5 +213,11 @@ abstract class ADiagram
 
         return $this;
     }
+
+    /**
+     *
+     * @return string
+     */
+    abstract public function render();
 
 }

@@ -19,5 +19,23 @@ namespace sufir\PlantUml\Diagram\Base;
  */
 abstract class ACompositeElement extends AElement
 {
-    //put your code here
+
+    /**
+     *
+     * @var array|\sufir\PlantUml\Diagram\Base\AElement[]
+     */
+    protected $elements = array();
+
+    /**
+     *
+     * @param \sufir\PlantUml\Diagram\Base\AElement $element
+     * @return \sufir\PlantUml\Diagram\Base\ACompositeElement
+     */
+    public function addElement(AElement $element)
+    {
+        $this->elements[$element->getUniqueId()] = $element;
+
+        return $this;
+    }
+
 }

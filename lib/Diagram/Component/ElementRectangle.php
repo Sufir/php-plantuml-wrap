@@ -7,9 +7,7 @@
  * @copyright Sklyarov Alexey
  */
 
-namespace ElementRectangle;
-
-use sufir\PlantUml\Diagram\Base\ACompositeElement;
+namespace sufir\PlantUml\Diagram\Component;
 
 /**
  * ElementRectangle
@@ -17,9 +15,9 @@ use sufir\PlantUml\Diagram\Base\ACompositeElement;
  * Description of ElementRectangle
  *
  * @author Sklyarov Alexey <sufir@mihailovka.info>
- * @package sufir\PlantUml\Diagram\Base\AElement
+ * @package sufir\PlantUml\Diagram\Component
  */
-class ElementRectangle extends ACompositeElement
+class ElementRectangle extends BaseCompositeElement
 {
     //put your code here
 }

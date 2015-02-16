@@ -10,7 +10,7 @@
 namespace sufir\PlantUml\Diagram;
 
 use sufir\PlantUml\Diagram\Base\AElement;
-use sufir\PlantUml\Diagram\Base\ARelation;
+use sufir\PlantUml\Diagram\Base\Skin;
 
 /**
  * Component
@@ -69,6 +69,69 @@ class Component extends ADiagram
             Component::ELEMENT_PACKAGE,
             Component::ELEMENT_RECTANGLE,
         ));
+    }
+
+    public function render()
+    {
+        $definition = "@startuml\n";
+
+        if ($this->scale && $this->scale != 1) {
+            $definition .= "scale " . $this->scale . "\n";
+        }
+
+        if ($this->umlNotation) {
+            $definition .= "skinparam componentStyle " . $this->umlNotation . "\n";
+        }
+
+        if ($this->getTitle()) {
+            $definition .= "title " . str_replace("\n", '\n', $this->getTitle()) . "\n";
+        }
+
+        if ($this->getHeader()) {
+            $definition .= "header\n" . $this->getHeader() . "\nendheader\n";
+        }
+
+        if ($this->getFooter()) {
+            $definition .= "footer\n" . $this->getFooter() . "\nendfooter\n";
+        }
+
+        $definition .= "\n' Объявление элементов -------------------------------------------------------------------\n";
+        foreach ($this->elements as $element) {
+            $definition .= $element->render();
+        }
+
+        $definition .= "\n' Объявление отношений -------------------------------------------------------------------\n";
+        foreach ($this->relations as $relation) {
+            $definition .= $relation->render();
+        }
+
+        $definition .= "\n' Стилизация диаграммы -------------------------------------------------------------------\n";
+        foreach ($this->skins as $elementType => $skin) {
+            $definition .= $this->renderSkin($skin, $elementType);
+        }
+
+        $definition .= "\n@enduml";
+        return $definition;
+    }
+
+    protected function renderSkin(Skin $skin, $elementType)
+    {
+        $elementType = ($elementType === '_MAIN_') ? '' : $elementType;
+
+        $definition = "skinparam {$elementType} {\n";
+
+        foreach ($skin as $prop => $value) {
+            if (is_bool($value)) {
+                $value = ($value) ? 'true' : 'false';
+            } elseif (!$value) {
+                continue;
+            }
+
+            $definition .= "  {$prop} {$value}\n";
+        }
+
+        $definition .= "}\n";
+        return $definition;
     }
 
 }

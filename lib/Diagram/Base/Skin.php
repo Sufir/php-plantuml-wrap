@@ -17,7 +17,7 @@ namespace sufir\PlantUml\Diagram\Base;
  * @author Sklyarov Alexey <sufir@mihailovka.info>
  * @package sufir\PlantUml\Diagram\Base
  */
-class Skin
+class Skin implements \IteratorAggregate
 {
 
     const GRADIENT_VTRTICAL = '-',
@@ -25,17 +25,126 @@ class Skin
         GRADIENT_DIAGONAL_FROM_LEFT_TOP = '/',
         GRADIENT_DIAGONAL_FROM_LEFT_BOTTOM = '\\';
 
-    protected $backgroundColor = 'white';
-    protected $lineColor = 'black';
-    protected $fontColor = 'black';
-    protected $fontSize = '13';
-    protected $fontStyle = 'plain';
-    protected $fontName = 'Arial';
-    protected $align = 'center';
-    protected $shadow = true;
-    protected $arrowColor = '#000000';
-	protected $arrowFontColor = '#555555';
-    protected $arrowFontName = 'Arial';
+    protected $style = array(
+        'backgroundColor' => null,
+        'lineColor' => null,
+        'fontColor' => null,
+        'fontSize' => null,
+        'fontStyle' => null,
+        'fontName' => null,
+        'align' => null,
+        'shadow' => true,
+        'arrowColor' => null,
+        'arrowFontColor' => null,
+        'arrowFontName' => null,
+    );
+
+    /**
+     *
+     * @return type
+     */
+    public function getBackgroundColor()
+    {
+        return $this->style['backgroundColor'];
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function getLineColor()
+    {
+        return $this->style['lineColor'];
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function getFontColor()
+    {
+        return $this->style['fontColor'];
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function getFontSize()
+    {
+        return $this->style['fontSize'];
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function getFontStyle()
+    {
+        return $this->style['fontStyle'];
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function getFontName()
+    {
+        return $this->style['fontName'];
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function getAlign()
+    {
+        return $this->style['align'];
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function getShadow()
+    {
+        return $this->style['shadow'];
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function getArrowColor()
+    {
+        return $this->style['arrowColor'];
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function getArrowFontColor()
+    {
+        return $this->style['arrowFontColor'];
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function getArrowFontName()
+    {
+        return $this->style['arrowFontName'];
+    }
+
+    /**
+     *
+     * @return \ArrayIterator
+     */
+    public function getIterator() {
+        return new \ArrayIterator($this->style);
+    }
 
     /**
      *
@@ -46,108 +155,9 @@ class Skin
      */
     public function setBackgroundGradient($from, $to, $direction = Skin::GRADIENT_DIAGONAL_FROM_LEFT_TOP)
     {
-        $this->backgroundColor = $from . $direction . rtrim($to, '#');
+        $this->style['backgroundColor'] = $from . $direction . ltrim($to, '#');
 
         return $this;
-    }
-
-    /**
-     *
-     * @return type
-     */
-    public function getBackgroundColor()
-    {
-        return $this->backgroundColor;
-    }
-
-    /**
-     *
-     * @return string
-     */
-    public function getLineColor()
-    {
-        return $this->lineColor;
-    }
-
-    /**
-     *
-     * @return string
-     */
-    public function getFontColor()
-    {
-        return $this->fontColor;
-    }
-
-    /**
-     *
-     * @return string
-     */
-    public function getFontSize()
-    {
-        return $this->fontSize;
-    }
-
-    /**
-     *
-     * @return string
-     */
-    public function getFontStyle()
-    {
-        return $this->fontStyle;
-    }
-
-    /**
-     *
-     * @return string
-     */
-    public function getFontName()
-    {
-        return $this->fontName;
-    }
-
-    /**
-     *
-     * @return string
-     */
-    public function getAlign()
-    {
-        return $this->align;
-    }
-
-    /**
-     *
-     * @return string
-     */
-    public function getShadow()
-    {
-        return $this->shadow;
-    }
-
-    /**
-     *
-     * @return string
-     */
-    public function getArrowColor()
-    {
-        return $this->arrowColor;
-    }
-
-    /**
-     *
-     * @return string
-     */
-    public function getArrowFontColor()
-    {
-        return $this->arrowFontColor;
-    }
-
-    /**
-     *
-     * @return string
-     */
-    public function getArrowFontName()
-    {
-        return $this->arrowFontName;
     }
 
     /**
@@ -157,7 +167,7 @@ class Skin
      */
     public function setArrowFontName($arrowFontName)
     {
-        $this->arrowFontName = $arrowFontName;
+        $this->style['arrowFontName'] = $arrowFontName;
         return $this;
     }
 
@@ -168,7 +178,7 @@ class Skin
      */
     public function setBackgroundColor($backgroundColor)
     {
-        $this->backgroundColor = $backgroundColor;
+        $this->style['backgroundColor'] = $backgroundColor;
         return $this;
     }
 
@@ -179,7 +189,7 @@ class Skin
      */
     public function setLineColor($lineColor)
     {
-        $this->lineColor = $lineColor;
+        $this->style['lineColor'] = $lineColor;
         return $this;
     }
 
@@ -190,7 +200,7 @@ class Skin
      */
     public function setFontColor($fontColor)
     {
-        $this->fontColor = $fontColor;
+        $this->style['fontColor'] = $fontColor;
         return $this;
     }
 
@@ -201,7 +211,7 @@ class Skin
      */
     public function setFontSize($fontSize)
     {
-        $this->fontSize = $fontSize;
+        $this->style['fontSize'] = $fontSize;
         return $this;
     }
 
@@ -212,7 +222,7 @@ class Skin
      */
     public function setFontStyle($fontStyle)
     {
-        $this->fontStyle = $fontStyle;
+        $this->style['fontStyle'] = $fontStyle;
         return $this;
     }
 
@@ -223,7 +233,7 @@ class Skin
      */
     public function setFontName($fontName)
     {
-        $this->fontName = $fontName;
+        $this->style['fontName'] = $fontName;
         return $this;
     }
 
@@ -234,7 +244,7 @@ class Skin
      */
     public function setAlign($align)
     {
-        $this->align = $align;
+        $this->style['align'] = $align;
         return $this;
     }
 
@@ -245,7 +255,7 @@ class Skin
      */
     public function setShadow($shadow)
     {
-        $this->shadow = $shadow;
+        $this->style['shadow'] = $shadow;
         return $this;
     }
 
@@ -256,7 +266,7 @@ class Skin
      */
     public function setArrowColor($arrowColor)
     {
-        $this->arrowColor = $arrowColor;
+        $this->style['arrowColor'] = $arrowColor;
         return $this;
     }
 
@@ -267,7 +277,7 @@ class Skin
      */
     public function setArrowFontColor($arrowFontColor)
     {
-        $this->arrowFontColor = $arrowFontColor;
+        $this->style['arrowFontColor'] = $arrowFontColor;
         return $this;
     }
 

@@ -1,25 +1,25 @@
 <?php
 
 /**
- * BaseElement.php
+ * BaseGroupElement.php
  *
- * @date 16.02.2015 10:52:02
+ * @date 16.02.2015 13:24:15
  * @copyright Sklyarov Alexey
  */
 
 namespace sufir\PlantUml\Diagram\Component;
 
-use sufir\PlantUml\Diagram\Base\AElement;
+use sufir\PlantUml\Diagram\Base\ACompositeElement;
 
 /**
- * BaseElement
+ * BaseGroupElement
  *
- * Description of BaseElement
+ * Description of BaseGroupElement
  *
  * @author Sklyarov Alexey <sufir@mihailovka.info>
  * @package sufir\PlantUml\Diagram\Component
  */
-abstract class BaseElement extends AElement
+class BaseCompositeElement extends ACompositeElement
 {
 
     public function getType()
@@ -54,6 +54,16 @@ abstract class BaseElement extends AElement
         }
 
         $definition = str_pad($definition, strlen($definition)+$offset, " ", STR_PAD_LEFT);
+
+        if (!empty($this->elements)) {
+            $definition .= " {\n";
+
+            foreach ($this->elements as $element) {
+                $definition .= $element->render($offset+2);
+            }
+
+            $definition .= str_pad("}\n", strlen("}\n")+$offset, " ", STR_PAD_LEFT);
+        }
 
         return $definition . "\n";
     }

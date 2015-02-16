@@ -7,9 +7,7 @@
  * @copyright Sklyarov Alexey
  */
 
-namespace ElementDatabase;
-
-use sufir\PlantUml\Diagram\Base\ACompositeElement;
+namespace sufir\PlantUml\Diagram\Component;
 
 /**
  * ElementDatabase
@@ -17,9 +15,9 @@ use sufir\PlantUml\Diagram\Base\ACompositeElement;
  * Description of ElementDatabase
  *
  * @author Sklyarov Alexey <sufir@mihailovka.info>
- * @package sufir\PlantUml\Diagram\Base\AElement
+ * @package sufir\PlantUml\Diagram\Component
  */
-class ElementDatabase extends ACompositeElement
+class ElementDatabase extends BaseCompositeElement
 {
-    //put your code here
+    
 }

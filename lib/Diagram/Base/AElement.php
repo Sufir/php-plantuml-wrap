@@ -132,7 +132,7 @@ abstract class AElement
      */
     public function setGradient($from, $to, $direction = '/')
     {
-        $this->color = $from . $direction . rtrim($to, '#');
+        $this->color = $from . $direction . ltrim($to, '#');
 
         return $this;
     }
@@ -168,8 +168,9 @@ abstract class AElement
 
     /**
      *
+     * @param string $offset
      * @return string
      */
-    abstract public function render();
+    abstract public function render($offset = 0);
 
 }

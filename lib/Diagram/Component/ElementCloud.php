@@ -7,9 +7,7 @@
  * @copyright Sklyarov Alexey
  */
 
-namespace ElementCloud;
-
-use sufir\PlantUml\Diagram\Base\ACompositeElement;
+namespace sufir\PlantUml\Diagram\Component;
 
 /**
  * ElementCloud
@@ -17,9 +15,10 @@ use sufir\PlantUml\Diagram\Base\ACompositeElement;
  * Description of ElementCloud
  *
  * @author Sklyarov Alexey <sufir@mihailovka.info>
- * @package sufir\PlantUml\Diagram\Base\AElement
+ * @package sufir\PlantUml\Diagram\Component
  */
-class ElementCloud extends ACompositeElement
+class ElementCloud extends BaseCompositeElement
 {
-    //put your code here
+
+
 }
