@@ -46,7 +46,7 @@ class Skin
      */
     public function setBackgroundGradient($from, $to, $direction = Skin::GRADIENT_DIAGONAL_FROM_LEFT_TOP)
     {
-        $this->backgroundColor = $from . $direction . $to;
+        $this->backgroundColor = $from . $direction . rtrim($to, '#');
 
         return $this;
     }

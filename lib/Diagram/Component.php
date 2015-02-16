@@ -10,6 +10,7 @@
 namespace sufir\PlantUml\Diagram;
 
 use sufir\PlantUml\Diagram\Base\AElement;
+use sufir\PlantUml\Diagram\Base\ARelation;
 
 /**
  * Component
@@ -70,5 +71,4 @@ class Component extends ADiagram
         ));
     }
 
-    //put your code here
 }

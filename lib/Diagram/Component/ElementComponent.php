@@ -7,9 +7,7 @@
  * @copyright Sklyarov Alexey
  */
 
-namespace ElementComponent;
-
-use sufir\PlantUml\Diagram\Base\AElement;
+namespace sufir\PlantUml\Diagram\Component;
 
 /**
  * ElementComponent
@@ -17,9 +15,13 @@ use sufir\PlantUml\Diagram\Base\AElement;
  * Description of ElementComponent
  *
  * @author Sklyarov Alexey <sufir@mihailovka.info>
- * @package sufir\PlantUml\Diagram\Base\AElement
+ * @package sufir\PlantUml\Diagram\Component
  */
-class ElementComponent extends AElement
+class ElementComponent extends BaseElement
 {
+    public function getType()
+    {
+        return 'component';
+    }
 
 }

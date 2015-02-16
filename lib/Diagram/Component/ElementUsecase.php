@@ -7,9 +7,7 @@
  * @copyright Sklyarov Alexey
  */
 
-namespace ElementUsecase;
-
-use sufir\PlantUml\Diagram\Base\AElement;
+namespace sufir\PlantUml\Diagram\Component;
 
 /**
  * ElementUsecase
@@ -17,9 +15,9 @@ use sufir\PlantUml\Diagram\Base\AElement;
  * Description of ElementUsecase
  *
  * @author Sklyarov Alexey <sufir@mihailovka.info>
- * @package sufir\PlantUml\Diagram\Base\AElement
+ * @package sufir\PlantUml\Diagram\Component
  */
-class ElementUsecase extends AElement
+class ElementUsecase extends BaseElement
 {
-    //put your code here
+
 }

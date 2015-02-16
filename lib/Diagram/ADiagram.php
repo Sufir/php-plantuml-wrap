@@ -9,7 +9,9 @@
 
 namespace sufir\PlantUml\Diagram;
 
-//use sufir\PlantUml\Diagram\Base\AElement;
+use SplObjectStorage;
+use sufir\PlantUml\Diagram\Base\AElement;
+use sufir\PlantUml\Diagram\Base\ARelation;
 
 /**
  * ADiagram
@@ -53,9 +55,14 @@ abstract class ADiagram
 
     /**
      *
-     * @var array|\sufir\PlantUml\Diagram\Base\AElement[]
+     * @var \SplObjectStorage|\sufir\PlantUml\Diagram\Base\AElement[]
      */
-    protected $relations = array();
+    protected $relations;
+
+    public function __construct()
+    {
+        $this->relations = new SplObjectStorage;
+    }
 
     /**
      *
@@ -166,7 +173,7 @@ abstract class ADiagram
         $elementType = ($elementType) ? $elementType : '_MAIN_';
 
         if ($elementType !== '_MAIN_' && !$this->isSupported($elementType)) {
-            throw new \InvalidArgumentException('Недопустимый тип элемента: ' . $umlNotation);
+            throw new \InvalidArgumentException('Недопустимый тип элемента: ' . $elementType);
         }
 
         $this->skins[$elementType] = $skin;
@@ -182,5 +189,29 @@ abstract class ADiagram
      * @return boolean
      */
     abstract public function isSupported($element);
+
+    /**
+     * @param \sufir\PlantUml\Diagram\Base\AElement $element
+     * @return \sufir\PlantUml\Diagram\ADiagram
+     */
+    public function addElement(AElement $element)
+    {
+        $this->elements[$element->getUniqueId()] = $element;
+
+        return $this;
+    }
+
+    /**
+     * @param \sufir\PlantUml\Diagram\Base\AElement $relation
+     * @return \sufir\PlantUml\Diagram\ADiagram
+     */
+    public function addRelation(ARelation $relation)
+    {
+        if (!$this->relations->contains($relation)) {
+            $this->relations->attach($relation);
+        }
+
+        return $this;
+    }
 
 }

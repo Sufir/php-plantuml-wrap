@@ -7,9 +7,7 @@
  * @copyright Sklyarov Alexey
  */
 
-namespace ElementInterface;
-
-use sufir\PlantUml\Diagram\Base\AElement;
+namespace sufir\PlantUml\Diagram\Component;
 
 /**
  * ElementInterface
@@ -17,9 +15,9 @@ use sufir\PlantUml\Diagram\Base\AElement;
  * Description of ElementInterface
  *
  * @author Sklyarov Alexey <sufir@mihailovka.info>
- * @package sufir\PlantUml\Diagram\Base\AElement
+ * @package sufir\PlantUml\Diagram\Component
  */
-class ElementInterface extends AElement
+class ElementInterface extends BaseElement
 {
-    //put your code here
+
 }

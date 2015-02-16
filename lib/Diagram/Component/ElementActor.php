@@ -7,9 +7,7 @@
  * @copyright Sklyarov Alexey
  */
 
-namespace ElementActor;
-
-use sufir\PlantUml\Diagram\Base\AElement;
+namespace sufir\PlantUml\Diagram\Component;
 
 /**
  * ElementActor
@@ -17,9 +15,14 @@ use sufir\PlantUml\Diagram\Base\AElement;
  * Description of ElementActor
  *
  * @author Sklyarov Alexey <sufir@mihailovka.info>
- * @package sufir\PlantUml\Diagram\Base\AElement
+ * @package sufir\PlantUml\Diagram\Component
  */
-class ElementActor extends AElement
+class ElementActor extends BaseElement
 {
-    //put your code here
+
+    /*public function getType()
+    {
+        return 'actor';
+    }*/
+
 }
