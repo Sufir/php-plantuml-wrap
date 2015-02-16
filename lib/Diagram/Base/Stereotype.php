@@ -26,7 +26,7 @@ class Stereotype
      *
      * @var \sufir\PlantUml\Diagram\Base\Skin
      */
-    protected $skin = array();
+    protected $skin = null;
 
     public function __construct($name)
     {
@@ -50,11 +50,20 @@ class Stereotype
 
     /**
      *
-     * @return string
+     * @return \sufir\PlantUml\Diagram\Base\Skin
      */
     public function getSkin()
     {
         return $this->skin;
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function hasSkin()
+    {
+        return !!$this->skin;
     }
 
     /**

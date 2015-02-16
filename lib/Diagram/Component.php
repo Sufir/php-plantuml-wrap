@@ -10,6 +10,7 @@
 namespace sufir\PlantUml\Diagram;
 
 use sufir\PlantUml\Diagram\Base\AElement;
+use sufir\PlantUml\Diagram\Base\ACompositeElement;
 use sufir\PlantUml\Diagram\Base\Skin;
 
 /**
@@ -110,11 +111,31 @@ class Component extends ADiagram
             $definition .= $this->renderSkin($skin, $elementType);
         }
 
+        $definition .= "\n' Стили отдельных стереотипов\n";
+        $stereotypes = $this->findStereotypes($this->elements);
+        //var_dump($stereotypes); die;
+
+        foreach ($stereotypes as $elementType => $stereotypeList) {
+            foreach ($stereotypeList as $stereotype) {
+                if (!$stereotype->hasSkin()) {
+                    continue;
+                }
+
+                $definition .= $this->renderSkin($stereotype->getSkin(), $elementType, $stereotype->getName());
+            }
+        }
+
         $definition .= "\n@enduml";
         return $definition;
     }
 
-    protected function renderSkin(Skin $skin, $elementType)
+    /**
+     * @param Skin $skin
+     * @param string $elementType
+     * @param string $stereotypeName
+     * @return string
+     */
+    protected function renderSkin(Skin $skin, $elementType, $stereotypeName = null)
     {
         $elementType = ($elementType === '_MAIN_') ? '' : $elementType;
 
@@ -127,11 +148,43 @@ class Component extends ADiagram
                 continue;
             }
 
-            $definition .= "  {$prop} {$value}\n";
+            $definition .= (!$stereotypeName) ? "  {$prop} {$value}\n" : "  {$prop}<<{$stereotypeName}>> {$value}\n";
         }
 
         $definition .= "}\n";
         return $definition;
+    }
+
+    /**
+     *
+     * @param AElement[] $elements
+     * @param array $stereotypes
+     * @return array
+     */
+    protected function findStereotypes(array $elements, array &$stereotypes = array()) {
+
+        foreach ($elements as $element) {
+
+            if ($element instanceof ACompositeElement) {
+
+                foreach ($element->getStereotypes() as $stereotype) {
+                    $stereotypes[$element->getType()][$stereotype->getName()] = $stereotype;
+                }
+
+                $this->findStereotypes($element->getChilds(), $stereotypes);
+
+            } elseif ($element instanceof AElement) {
+
+                foreach ($element->getStereotypes() as $stereotype) {
+                    $stereotypes[$element->getType()][$stereotype->getName()] = $stereotype;
+                }
+
+            }
+
+
+        }
+
+        return $stereotypes;
     }
 
 }

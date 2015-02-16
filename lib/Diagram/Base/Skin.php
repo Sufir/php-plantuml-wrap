@@ -27,13 +27,14 @@ class Skin implements \IteratorAggregate
 
     protected $style = array(
         'backgroundColor' => null,
+        'borderColor' => null,
         'lineColor' => null,
         'fontColor' => null,
         'fontSize' => null,
         'fontStyle' => null,
         'fontName' => null,
         'align' => null,
-        'shadow' => true,
+        'shadowing' => null,
         'arrowColor' => null,
         'arrowFontColor' => null,
         'arrowFontName' => null,
@@ -46,6 +47,15 @@ class Skin implements \IteratorAggregate
     public function getBackgroundColor()
     {
         return $this->style['backgroundColor'];
+    }
+
+    /**
+     *
+     * @return type
+     */
+    public function getBorderColor()
+    {
+        return $this->style['borderColor'];
     }
 
     /**
@@ -108,7 +118,7 @@ class Skin implements \IteratorAggregate
      */
     public function getShadow()
     {
-        return $this->style['shadow'];
+        return $this->style['shadowing'];
     }
 
     /**
@@ -179,6 +189,17 @@ class Skin implements \IteratorAggregate
     public function setBackgroundColor($backgroundColor)
     {
         $this->style['backgroundColor'] = $backgroundColor;
+        return $this;
+    }
+
+    /**
+     *
+     * @param string $borderColor
+     * @return \sufir\PlantUml\Diagram\Base\Skin
+     */
+    public function setBorderColor($borderColor)
+    {
+        $this->style['borderColor'] = $borderColor;
         return $this;
     }
 
@@ -255,7 +276,7 @@ class Skin implements \IteratorAggregate
      */
     public function setShadow($shadow)
     {
-        $this->style['shadow'] = $shadow;
+        $this->style['shadowing'] = !!$shadow;
         return $this;
     }
 

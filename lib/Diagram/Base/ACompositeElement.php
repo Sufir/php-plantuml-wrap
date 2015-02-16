@@ -9,6 +9,9 @@
 
 namespace sufir\PlantUml\Diagram\Base;
 
+use sufir\PlantUml\Diagram\Base\AElement;
+use sufir\PlantUml\Diagram\Base\ACompositeElement;
+
 /**
  * ACompositeElement
  *
@@ -36,6 +39,15 @@ abstract class ACompositeElement extends AElement
         $this->elements[$element->getUniqueId()] = $element;
 
         return $this;
+    }
+
+    /**
+     *
+     * @return \sufir\PlantUml\Diagram\Base\AElement[]
+     */
+    public function getChilds()
+    {
+        return $this->elements;
     }
 
 }

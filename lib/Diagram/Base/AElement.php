@@ -85,11 +85,20 @@ abstract class AElement
 
     /**
      *
-     * @return string
+     * @return array
      */
     public function getStereotypes()
     {
         return $this->stereotypes;
+    }
+
+    /**
+     *
+     * @return array
+     */
+    public function hasStereotypes()
+    {
+        return !empty($this->stereotypes);
     }
 
     /**
@@ -139,12 +148,12 @@ abstract class AElement
 
     /**
      *
-     * @param string $stereotypes
+     * @param \sufir\PlantUml\Diagram\Base\Stereotype $stereotypes
      * @return \sufir\PlantUml\Diagram\Base\AElement
      */
-    public function setStereotypes($stereotypes)
+    public function addStereotype(Stereotype $stereotype)
     {
-        $this->stereotypes = $stereotypes;
+        $this->stereotypes[$stereotype->getName()] = $stereotype;
         return $this;
     }
 
