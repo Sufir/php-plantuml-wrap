@@ -1,6 +1,14 @@
 {
     "name": "sufir/php-plantuml-wrap",
     "description": "Wrap for UML generation by PlantUml on PHP",
+	"keywords": [
+        "php",
+        "plantuml",
+		"uml",
+		"diagram"
+    ],
+    "type": "library",
+    "license": "Public Domain",
     "authors": [
         {
             "name": "Sufir",
