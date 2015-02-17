@@ -76,6 +76,8 @@ class Component extends ADiagram
     {
         $definition = "@startuml\n";
 
+        // left to right direction\n - vertical orientation
+
         if ($this->scale && $this->scale != 1) {
             $definition .= "scale " . $this->scale . "\n";
         }
