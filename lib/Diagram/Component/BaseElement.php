@@ -59,8 +59,7 @@ abstract class BaseElement extends AElement
             $definition .= "\n"
                 . str_pad("", $offset, " ", STR_PAD_LEFT)
                 . "note {$this->notePosition} of " . $this->getUniqueId() . "\n"
-                . str_pad("", $offset+2, " ", STR_PAD_LEFT)
-                . $this->getNote() . "\n"
+                . trim($this->getNote()) . "\n"
                 . str_pad("", $offset, " ", STR_PAD_LEFT)
                 . "end note";
         }
