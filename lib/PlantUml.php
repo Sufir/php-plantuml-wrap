@@ -53,7 +53,7 @@ class PlantUml
      * @param string $diagramType
      * @param string $elementType
      * @param string $elementTitle
-     * @return \sufir\PlantUml\Diagram\Base\AElement
+     * @return \sufir\PlantUml\Diagram\Base\AElement|\sufir\PlantUml\Diagram\Base\ACompositeElement
      * @throws \InvalidArgumentException
      */
     public function createElement($diagramType, $elementType, $elementTitle)

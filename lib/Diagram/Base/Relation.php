@@ -268,9 +268,9 @@ class Relation
         }
 
         if ($this->direction === self::DIRECTION_LEFT || $this->direction === self::DIRECTION_TOP) {
-            $definition = $this->to()->getUniqueId() . ' ' . $this->getArrow($this->arrowTo, $this->getDirection()) . $line . $this->getArrow($this->arrowFrom, $this->getDirection()) . ' ' . $this->from()->getUniqueId();
+            $definition = $this->to()->getUniqueId() . ' ' . $this->getArrow($this->arrowTo, 'left') . $line . $this->getArrow($this->arrowFrom, 'right') . ' ' . $this->from()->getUniqueId();
         } else {
-            $definition = $this->from()->getUniqueId() . ' ' . $this->getArrow($this->arrowFrom, $this->getDirection()) . $line . $this->getArrow($this->arrowTo, $this->getDirection()) . ' ' . $this->to()->getUniqueId();
+            $definition = $this->from()->getUniqueId() . ' ' . $this->getArrow($this->arrowFrom, 'left') . $line . $this->getArrow($this->arrowTo, 'right') . ' ' . $this->to()->getUniqueId();
         }
 
         if ($this->getLabel()) {
@@ -285,9 +285,9 @@ class Relation
      * @param string $direction
      * @return string
      */
-    protected function getArrow($arrowType, $direction)
+    protected function getArrow($arrowType, $position)
     {
-        if ($direction === self::DIRECTION_LEFT || $direction === self::DIRECTION_TOP) {
+        if ($position === 'left') {
             return (isset($this->leftArrows[$arrowType])) ? $this->leftArrows[$arrowType] : '';
         }
 
