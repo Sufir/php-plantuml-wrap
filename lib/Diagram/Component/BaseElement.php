@@ -55,6 +55,10 @@ abstract class BaseElement extends AElement
 
         $definition = str_pad($definition, strlen($definition)+$offset, " ", STR_PAD_LEFT);
 
+        if ($this->getNote()) {
+            $definition .= "\nnote {$this->notePosition} of " . $this->getUniqueId() . "\n" . $this->getNote() . "\nend note\n";
+        }
+
         return $definition . "\n";
     }
 

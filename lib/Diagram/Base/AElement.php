@@ -45,6 +45,16 @@ abstract class AElement
      */
     protected $link;
 
+    /**
+     * @var string
+     */
+    protected $note;
+
+    /**
+     * @var string
+     */
+    protected $notePosition = 'left';
+
     public function __construct($title)
     {
         $this->setTitle($title);
@@ -108,6 +118,28 @@ abstract class AElement
     public function getLink()
     {
         return $this->link;
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function getNote()
+    {
+        return $this->note;
+    }
+
+    /**
+     *
+     * @param string $note
+     * @return \sufir\PlantUml\Diagram\Base\AElement
+     */
+    public function setNote($note, $position = 'left')
+    {
+        $this->note = $note;
+        $this->notePosition = strtolower($position);
+
+        return $this;
     }
 
     /**
