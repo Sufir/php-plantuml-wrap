@@ -76,10 +76,16 @@ class Component extends ADiagram
     {
         $definition = "@startuml\n";
 
-        //$definition = "left to right direction\n";
-
         if ($this->scale && $this->scale != 1) {
             $definition .= "scale " . $this->scale . "\n";
+        }
+
+        if (!$this->isStereotypeVisible()) {
+            $definition .= "hide stereotype\n";
+        }
+
+        if ($this->isOrientationVertical()) {
+            $definition .= "left to right direction\n";
         }
 
         if ($this->umlNotation) {

@@ -59,6 +59,18 @@ abstract class ADiagram
      */
     protected $relations;
 
+    /**
+     *
+     * @var string
+     */
+    protected $orientation = 'horisontal';
+
+    /**
+     *
+     * @var boolean
+     */
+    protected $stereotypeVisible = true;
+
     public function __construct()
     {
         $this->relations = new SplObjectStorage;
@@ -100,6 +112,60 @@ abstract class ADiagram
     {
         return $this->monochrome;
     }
+
+    /**
+     * Нужно ли отображать стереотипы
+     *
+     * @return boolean
+     */
+    public function isStereotypeVisible()
+    {
+        return $this->stereotypeVisible;
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function isOrientationHorisontal()
+    {
+        return ($this->orientation === 'horisontal');
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function isOrientationVertical()
+    {
+        return ($this->orientation === 'vertical');
+    }
+
+    /**
+     *
+     * @param string $orientation
+     * @return \sufir\PlantUml\Diagram\ADiagram
+     */
+    public function setOrientation($orientation)
+    {
+        if (in_array(strtolower($orientation), array('horisontal', 'vertical'))) {
+            $this->orientation = strtolower($orientation);
+        }
+
+        return $this;
+    }
+
+    /**
+     *
+     * @param boolean $stereotypeVisible
+     * @return \sufir\PlantUml\Diagram\ADiagram
+     */
+    public function setStereotypeVisible($stereotypeVisible)
+    {
+        $this->stereotypeVisible = !!$stereotypeVisible;
+        return $this;
+    }
+
 
     /**
      * Принудительно задает использование черно-белого вывода

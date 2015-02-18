@@ -72,6 +72,11 @@ class Relation
     protected $color;
 
     /**
+     * @var boolean
+     */
+    protected $hidden = false;
+
+    /**
      * @var string
      */
     protected $line = self::LINE_SIMPLE;
@@ -166,6 +171,27 @@ class Relation
     {
         return $this->line;
     }
+
+    /**
+     *
+     * @return boolean
+     */
+    public function isHidden()
+    {
+        return $this->hidden;
+    }
+
+    /**
+     *
+     * @param boolean $hidden
+     * @return \sufir\PlantUml\Diagram\Base\Relation
+     */
+    public function setHidden($hidden)
+    {
+        $this->hidden = !!$hidden;
+        return $this;
+    }
+
 
     /**
      * @param string $line
@@ -263,7 +289,9 @@ class Relation
                 break;
         }
 
-        if ($this->getColor()) {
+        if ($this->isHidden()) {
+            $line = $line . '[hidden]';
+        } elseif ($this->getColor()) {
             $line = $line . '[#' . ltrim($this->getColor(), '#') . ']';
         }
 
