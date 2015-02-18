@@ -38,7 +38,27 @@ class Skin implements \IteratorAggregate
         'arrowColor' => null,
         'arrowFontColor' => null,
         'arrowFontName' => null,
+        'noteBackgroundColor' => null,
+        'noteBorderColor' => null,
     );
+
+    /**
+     *
+     * @return type
+     */
+    public function getNoteBackgroundColor()
+    {
+        return $this->style['noteBackgroundColor'];
+    }
+
+    /**
+     *
+     * @return type
+     */
+    public function getNoteBorderColor()
+    {
+        return $this->style['noteBorderColor'];
+    }
 
     /**
      *
@@ -178,6 +198,28 @@ class Skin implements \IteratorAggregate
     public function setArrowFontName($arrowFontName)
     {
         $this->style['arrowFontName'] = $arrowFontName;
+        return $this;
+    }
+
+    /**
+     *
+     * @param string $backgroundColor
+     * @return \sufir\PlantUml\Diagram\Base\Skin
+     */
+    public function setNoteBackgroundColor($backgroundColor)
+    {
+        $this->style['noteBackgroundColor'] = $backgroundColor;
+        return $this;
+    }
+
+    /**
+     *
+     * @param string $borderColor
+     * @return \sufir\PlantUml\Diagram\Base\Skin
+     */
+    public function setNoteBorderColor($borderColor)
+    {
+        $this->style['noteBorderColor'] = $borderColor;
         return $this;
     }
 

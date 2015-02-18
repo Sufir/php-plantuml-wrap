@@ -65,6 +65,10 @@ class BaseCompositeElement extends ACompositeElement
             $definition .= str_pad("}\n", strlen("}\n")+$offset, " ", STR_PAD_LEFT);
         }
 
+        if ($this->getNote()) {
+            $definition .= "\nnote {$this->notePosition} of " . $this->getUniqueId() . "\n" . $this->getNote() . "\nend note\n";
+        }
+
         return $definition . "\n";
     }
 
