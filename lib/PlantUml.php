@@ -132,7 +132,7 @@ class PlantUml
     public function convertDiagram(ADiagram $diagram, $converter = 'LocalJar')
     {
         if (!is_object($converter)) {
-            $converterClass = '\sufir\PlantUml\Converter\\' . $this->camelize($converter);
+            $converterClass = '\sufir\PlantUml\Converter\\' . ucfirst($this->camelize($converter));
 
             if (!class_exists($converterClass)) {
                 throw new \InvalidArgumentException('Класс конвертера не найден: ' . $converterClass);
