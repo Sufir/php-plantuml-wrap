@@ -135,7 +135,7 @@ class PlantUml
             $converterClass = '\sufir\PlantUml\Converter\\' . $this->camelize($converter);
 
             if (!class_exists($converterClass)) {
-                throw new \InvalidArgumentException('Класс конвертера не найден: ' . get_class($converter));
+                throw new \InvalidArgumentException('Класс конвертера не найден: ' . $converterClass);
             }
 
             $converter = new $converterClass;

@@ -28,7 +28,7 @@ class RemoteService implements IConverter
      */
     protected $outputFormat = PlantUml::OUTPUT_FORMAT_SVG;
 
-    public function convertDiagram(\sufir\PlantUml\Diagram\ADiagram $diagram)
+    public function convertDiagram(ADiagram $diagram)
     {
         return file_get_contents("http://www.plantuml.com:80/plantuml/{$this->outputFormat}/" . $this->encode64(gzdeflate($diagram->render(), 9)));
     }
