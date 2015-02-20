@@ -30,7 +30,7 @@ class RemoteService implements IConverter
 
     public function convertDiagram(\sufir\PlantUml\Diagram\ADiagram $diagram)
     {
-        echo file_get_contents("http://www.plantuml.com:80/plantuml/{$this->outputFormat}/" . $this->encode64(gzdeflate($diagram->render(), 9)));
+        return file_get_contents("http://www.plantuml.com:80/plantuml/{$this->outputFormat}/" . $this->encode64(gzdeflate($diagram->render(), 9)));
     }
 
     /**
