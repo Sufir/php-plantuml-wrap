@@ -30,6 +30,7 @@ class Relation
         LINE_SOLID = 'solid';
 
     const ARROW_NONE = 'none',
+        ARROW_BRACKET = 'bracket',
         ARROW_EXTENSION = 'extension',
         ARROW_COMPOSITION = 'composition',
         ARROW_AGGREGATION = 'aggregation',
@@ -82,10 +83,25 @@ class Relation
     protected $line = self::LINE_SIMPLE;
 
     /**
+     * @var length
+     */
+    protected $length = 1;
+
+    /**
+     * @var array
+     */
+    protected $lineSymbols = array(
+            self::LINE_DOTTED => '.',
+            self::LINE_SOLID => '=',
+            self::LINE_SIMPLE => '-',
+        );
+
+    /**
      * @var array
      */
     protected $leftArrows = array(
             self::ARROW_NONE => '',
+            self::ARROW_BRACKET => ')',
             self::ARROW_GENERALIZATION => '<<',
             self::ARROW_EXTENSION => '<|',
             self::ARROW_AGGREGATION => 'o',
@@ -98,6 +114,7 @@ class Relation
      */
     protected $rightArrows = array(
             self::ARROW_NONE => '',
+            self::ARROW_BRACKET => '(',
             self::ARROW_GENERALIZATION => '>>',
             self::ARROW_EXTENSION => '|>',
             self::ARROW_AGGREGATION => 'o',
@@ -275,25 +292,30 @@ class Relation
         return $this;
     }
 
-    public function render() {
-        switch ($this->getLineType()) {
-            case self::LINE_DOTTED:
-                $line = ($this->direction === self::DIRECTION_LEFT || $this->direction === self::DIRECTION_RIGHT) ? '.' : '..';
-                break;
-            case self::LINE_SOLID:
-                $line = ($this->direction === self::DIRECTION_LEFT || $this->direction === self::DIRECTION_RIGHT) ? '=' : '==';
-                break;
-            case self::LINE_SIMPLE:
-            default:
-                $line = ($this->direction === self::DIRECTION_LEFT || $this->direction === self::DIRECTION_RIGHT) ? '-' : '--';
-                break;
-        }
+    /**
+     * @return integer
+     */
+    public function getLength()
+    {
+        return $this->length;
+    }
 
-        if ($this->isHidden()) {
-            $line = $line . '[hidden]';
-        } elseif ($this->getColor()) {
-            $line = $line . '[#' . ltrim($this->getColor(), '#') . ']';
-        }
+    /**
+     * Длинна связи (расстояние между элементами).
+     * <br>
+     * Поддерживается только для вертикальных связей!
+     *
+     * @param integer $length
+     * @return \sufir\PlantUml\Diagram\Base\Relation
+     */
+    public function setLength($length)
+    {
+        $this->length = (int) $length;
+        return $this;
+    }
+
+    public function render() {
+        $line = $this->getLine();
 
         if ($this->direction === self::DIRECTION_LEFT || $this->direction === self::DIRECTION_TOP) {
             $definition = $this->to()->getUniqueId() . ' ' . $this->getArrow($this->arrowTo, 'left') . $line . $this->getArrow($this->arrowFrom, 'right') . ' ' . $this->from()->getUniqueId();
@@ -320,6 +342,29 @@ class Relation
         }
 
         return (isset($this->rightArrows[$arrowType])) ? $this->rightArrows[$arrowType] : '';
+    }
+
+    /**
+     *
+     * @return string
+     */
+    protected function getLine()
+    {
+        $lineSymbol = (isset($this->lineSymbols[$this->getLineType()])) ? $this->lineSymbols[$this->getLineType()] : $this->lineSymbols[self::LINE_SIMPLE];
+
+        if ($this->direction === self::DIRECTION_LEFT || $this->direction === self::DIRECTION_RIGHT) {
+            $line = $lineSymbol;
+        } else {
+            $line = str_pad($lineSymbol, $this->getLength()+1, $lineSymbol);
+        }
+
+        if ($this->isHidden()) {
+            $line = $line . '[hidden]';
+        } elseif ($this->getColor()) {
+            $line = $line . '[#' . ltrim($this->getColor(), '#') . ']';
+        }
+
+        return $line;
     }
 
 }

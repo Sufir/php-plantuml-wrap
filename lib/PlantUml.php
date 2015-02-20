@@ -122,32 +122,32 @@ class PlantUml
 
     /**
      *
-     * @param \sufir\PlantUml\Diagram $diagram
+     * @param \sufir\PlantUml\Diagram\ADiagram $diagram
+     * @return string
+     *
+     * @param \sufir\PlantUml\Diagram\ADiagram $diagram
+     * @param string|\sufir\PlantUml\Converter\IConverter $converter
      * @return string
      */
-    public function convertDiagram(ADiagram $diagram)
+    public function convertDiagram(ADiagram $diagram, $converter = 'LocalJar')
     {
-        $uml = $diagram->render();
-        $jar = __DIR__ . DIRECTORY_SEPARATOR . 'bin' . DIRECTORY_SEPARATOR . 'plantuml.jar';
-        $outputFormat = ($this->outputFormat === self::OUTPUT_FORMAT_SVG) ? '-tsvg' : '';
+        if (!is_object($converter)) {
+            $converterClass = '\sufir\PlantUml\Converter\\' . $this->camelize($converter);
 
-        $tmpInputFile = tempnam(sys_get_temp_dir(), 'plantuml');
-        file_put_contents($tmpInputFile, $uml);
+            if (!class_exists($converterClass)) {
+                throw new \InvalidArgumentException('Класс конвертера не найден: ' . get_class($converter));
+            }
 
-        $tmpOutputFile = tempnam(sys_get_temp_dir(), 'image');
-
-        if (stristr(PHP_OS, 'WIN')) {
-            shell_exec('type "' . $tmpInputFile . '" | java -jar "' . $jar . '" ' . $outputFormat . ' -charset UTF-8 -pipe > "' . $tmpOutputFile . '"');
-        } elseif (stristr(PHP_OS, 'LINUX')) {
-            shell_exec('cat "' . $tmpInputFile . '" | java -jar "' . $jar . '" ' . $outputFormat . ' -charset UTF-8 -pipe > "' . $tmpOutputFile . '"');
+            $converter = new $converterClass;
         }
 
-        $result = file_get_contents($tmpOutputFile);
+        if (!$converter instanceof \sufir\PlantUml\Converter\IConverter) {
+            throw new \InvalidArgumentException('Класс конвертера должен имплементировать интерфейс IConverter: ' . get_class($converter));
+        }
 
-        unlink($tmpInputFile);
-        unlink($tmpOutputFile);
-
-        return $result;
+        return $converter
+            ->setOutputFormat($this->outputFormat)
+            ->convertDiagram($diagram);
     }
 
     /**
