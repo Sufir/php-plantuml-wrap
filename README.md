@@ -1,5 +1,5 @@
 # php-plantuml-wrap
-Wrap for PlantUml on PHP. Quickly generation UML diagrams.
+Wrap for PlantUml on PHP. Quick generating UML diagrams.
 
 ## Example 1
 ```php
