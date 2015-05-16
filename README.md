@@ -1,6 +1,8 @@
 # php-plantuml-wrap
 Wrap for PlantUml on PHP. Quick generating UML diagrams.
 
+[![Latest Stable Version](https://poser.pugx.org/Sufir/php-plantuml-wrap/version)](https://packagist.org/packages/Sufir/php-plantuml-wrap) [![Latest Unstable Version](https://poser.pugx.org/Sufir/php-plantuml-wrap/v/unstable)](//packagist.org/packages/Sufir/php-plantuml-wrap) [![Total Downloads](https://poser.pugx.org/Sufir/php-plantuml-wrap/downloads)](https://packagist.org/packages/Sufir/php-plantuml-wrap)
+
 ### Installing with composer
 ```
 "require": {
